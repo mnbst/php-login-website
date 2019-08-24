@@ -15,8 +15,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/redis', function () {
+    $redis=app()->make('redis');
+    $redis->set("key1","testValue");
+    return $redis->get("key1");
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get("/site/{site}",'Youtube@index');
