@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Hamcrest\Arrays\IsArray;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
@@ -18,26 +19,26 @@ class HomeController extends Controller
     }
 
     /**
-     * Create a new controller instance.
-     * @param  Request  $request
-     * @param  int  $id
-     * @return Response
-     *
-     */
-    public function gettodo(Request $request)
-    {
-        $id = $request->session()->get('id');
-        $todo = DB::table('todos')->get();
-        $done = DB::table('todos')->get();
-    }
-
-    /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
     {
-        return view('home');
+        $todo = DB::table('todos')->where([['user_id', '=', Auth::id()], ['completed', '=', false]])->get();
+        $done = DB::table('todos')->where([['user_id', '=', Auth::id()], ['completed', '=', true]])->get();
+
+        if (isset($todo)) {
+            $t_count = count($todo);
+        } else {
+            $t_count = 0;
+        }
+        if (isset($done)) {
+            $d_count = count($done);
+        } else {
+            $d_count = 0;
+        }
+
+        return view('home', ['todos' => $todo, 't_count' => $t_count, 'dones' => $done, 'd_count' => $d_count]);
     }
 }

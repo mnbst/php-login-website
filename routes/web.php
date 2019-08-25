@@ -19,4 +19,4 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::post('/postTodo','PostTodoController@index');
+Route::post('/ajax/postTodo','PostTodoController@AjaxPost');

@@ -17,8 +17,8 @@ class CreateTodosTable extends Migration
             $table->bigIncrements('id');
             $table->integer('user_id');
             $table->string('title');
-            $table->string('text');
-            $table->boolean('completed');
+            $table->string('text')->nullable();
+            $table->boolean('completed')->default(0);
             $table->timestamps();
         });
     }

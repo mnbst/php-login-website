@@ -2,13 +2,13 @@
     <div class="panel panel-default col-md-6 col-xs-6">
         <ul class="list-group group-todo">
             <h2>Todo</h2>
-            <!-- use loop -->
+
+            @foreach($todos as $todo)
             <li ontouchstart="" class="list-group-item text-wrap">
-                <h4 class="list listgroup-item-heading"><!-- title --></h4>
-                <p class="list-group-item-text"><!-- text --></p>
+                <h4 class="list listgroup-item-heading">{{$todo->title}}</h4>
+                <p class="list-group-item-text">{{$todo->text}}</p>
                 <div class="buttons">
-                    <button ontouchstart="" type="button" class="btn btn-info btn-xs show-edit-modal" data-toggle="modal" data-target="#edit-modal"
-                        title="Edit">
+                    <button ontouchstart="" type="button" class="btn btn-info btn-xs show-edit-modal" data-toggle="modal" data-target="#edit-modal" title="Edit">
                         <i class="fas fa-edit fa-xs" aria-hidden="true"></i>
                     </button>
                     <button ontouchstart="" type="button" class="btn btn-danger btn-xs move-done" title="Done">
@@ -16,40 +16,45 @@
                     </button>
                 </div>
             </li>
-            <!-- end -->
+            @endforeach
         </ul>
         <div class="panel-footer">
-            <small><!--count --> list items</small>
+            <small>{{$t_count}} list items</small>
         </div>
+
         <!-- Button trigger modal -->
         <button href="#" class="btn btn-success show-todolist-modal" data-toggle="modal" data-target="#todolist-modal">Create New List</button>
     </div>
 
     <div class="panel panel-default col-md-6 col-xs-6">
-            <ul class="list-group group-done text-wrap">
-                <h2>Done</h2>
-                <!--use loop -->
-                <li ontouchstart="" class="list-group-item">
-                    <h4 class="list listgroup-item-heading"><!--title --></h4>
-                    <p class="list-group-item-text"><!-- text --></p>
-                    <div class="buttons">
-                        <button ontouchstart="" type="button" class="btn btn-danger btn-xs delete-done" title="Delete">
-                            <i class="fas fa-minus fa-xs" aria-hidden="true"></i>
-                        </button>
-                    </div>
-                </li>
-                <!--end -->
-            </ul>
-            <div class="panel-footer">
-                <small><!--count --> list items</small>
-            </div>
+        <ul class="list-group group-done text-wrap">
+            <h2>Done</h2>
+            @foreach($dones as $done)
+            <li ontouchstart="" class="list-group-item">
+                <h4 class="list listgroup-item-heading">
+                    {{$done->title}}
+                </h4>
+                <p class="list-group-item-text">
+                    {{$done->title}}
+                </p>
+                <div class="buttons">
+                    <button ontouchstart="" type="button" class="btn btn-danger btn-xs delete-done" title="Delete">
+                        <i class="fas fa-minus fa-xs" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </li>
+            @endforeach
+        </ul>
+        <div class="panel-footer">
+            <small>
+                {{$d_count}} list items</small>
         </div>
+    </div>
 </div>
 
 
-        <!-- Modal create-->
-<div class="modal fade" id="todolist-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-    aria-hidden="true">
+<!-- Modal create-->
+<div class="modal fade" id="todolist-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -60,7 +65,7 @@
             </div>
             <div class="modal-body">
                 <form action="">
-                @csrf
+                    @csrf
                     <div class="form-group">
                         <label for="" class="control-label">List Name</label>
                         <input type="text" class="form-control input-lg input-title">
@@ -80,9 +85,8 @@
 </div>
 
 
-        <!-- Modal edit-->
-<div class="modal fade" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-    aria-hidden="true">
+<!-- Modal edit-->
+<div class="modal fade" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -93,7 +97,7 @@
             </div>
             <div class="modal-body">
                 <form action="">
-                @csrf
+                    @csrf
                     <div class="form-group">
                         <label for="" class="control-label">List Name</label>
                         <input type="text" class="form-control input-lg input-title">
