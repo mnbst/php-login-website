@@ -1,3 +1,30 @@
+$(document).ready(function () {
+    $('#todo-search').keypress(function (e) {
+        if (e.which == 13) {
+            var keyword = $(this).val().trim();
+            if (keyword == '') {
+                return;
+            } else {
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    url: "{{ route('home.action') }}",
+                    contentType: "application/json",
+                    type: 'get',
+                    data: JSON.stringify({ 'keyword': keyword }),
+                    dataType: "json",
+                    scriptCharset: 'utf-8',
+                    success: function (data) {
+                        $().html(data);
+                    }
+                });
+            }
+        }
+    });
+});
+
+
 $(function () {
     $(document).on('click', '.save-change', function () {
         var title = $('.input-title').val();
@@ -20,6 +47,7 @@ $(function () {
             cache: false,
             scriptCharset: 'utf-8',
         }).then(
+
             $('.group-todo').append("<li class='list-group-item'><h4 class='list listgroup-item-heading'>" + title + "</h4>\
                 <p class='list-group-item-text text-wrap'>" + text + "</p><div class='buttons'>\
                 <button type='button' class='btn btn-info btn-xs' data-toggle='modal' data-target='#exampleModal' title='Edit'>\
@@ -40,7 +68,7 @@ $(function () {
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            url: 'done',
+            url: 'ajax/done',
             contentType: "application/json",
             type: 'PATCH',
             data: JSON.stringify({ 'title': done_title.trim(), 'text': done_text.trim() }),
@@ -71,7 +99,7 @@ $(function () {
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            url: 'delete',
+            url: 'ajax/delete',
             contentType: "application/json",
             type: 'DELETE',
             data: JSON.stringify({ 'title': del_title.trim(), 'text': del_text.trim() }),

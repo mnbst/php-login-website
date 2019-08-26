@@ -19,4 +19,10 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::post('/ajax/postTodo','PostTodoController@AjaxPost');
+Route::get('/search', 'SearchTodoController@action')->name('action');
+
+Route::post('/ajax/postTodo', 'PostTodoController@AjaxPost');
+
+Route::patch('/ajax/done', 'PatchTodoController@AjaxPatch');
+
+Route::delete('/ajax/delete', 'DeleteTodoController@AjaxDelete');

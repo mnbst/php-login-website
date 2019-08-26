@@ -1,5 +1,12 @@
+
 <div class="row justify-content-center">
-    <div class="panel panel-default col-md-6 col-xs-6">
+
+<div class="form-group has-search col-md-2 col-xs-12">
+    <span class="fa fa-search form-control-feedback"></span>
+    <input type="text" id="todo-search" class="form-control" placeholder="Search">
+  </div>
+
+    <div class="panel panel-default col-md-5 col-xs-12">
         <ul class="list-group group-todo">
             <h2>Todo</h2>
 
@@ -26,7 +33,7 @@
         <button href="#" class="btn btn-success show-todolist-modal" data-toggle="modal" data-target="#todolist-modal">Create New List</button>
     </div>
 
-    <div class="panel panel-default col-md-6 col-xs-6">
+    <div class="panel panel-default col-md-5 col-xs-12">
         <ul class="list-group group-done text-wrap">
             <h2>Done</h2>
             @foreach($dones as $done)
@@ -35,7 +42,7 @@
                     {{$done->title}}
                 </h4>
                 <p class="list-group-item-text">
-                    {{$done->title}}
+                    {{$done->text}}
                 </p>
                 <div class="buttons">
                     <button ontouchstart="" type="button" class="btn btn-danger btn-xs delete-done" title="Delete">

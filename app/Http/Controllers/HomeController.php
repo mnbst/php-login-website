@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Hamcrest\Arrays\IsArray;
+use App\Todo;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -25,8 +24,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $todo = DB::table('todos')->where([['user_id', '=', Auth::id()], ['completed', '=', false]])->get();
-        $done = DB::table('todos')->where([['user_id', '=', Auth::id()], ['completed', '=', true]])->get();
+        $todo = Todo::where([['user_id', '=', Auth::id()], ['completed', '=', false]])->get();
+        $done = Todo::where([['user_id', '=', Auth::id()], ['completed', '=', true]])->get();
 
         if (isset($todo)) {
             $t_count = count($todo);
