@@ -7,26 +7,14 @@
   </div>
 
     <div class="panel panel-default col-md-5 col-xs-12">
-        <ul class="list-group group-todo">
-            <h2>Todo</h2>
+    <h2>Todo</h2>
 
-            @foreach($todos as $todo)
-            <li ontouchstart="" class="list-group-item text-wrap">
-                <h4 class="list listgroup-item-heading">{{$todo->title}}</h4>
-                <p class="list-group-item-text">{{$todo->text}}</p>
-                <div class="buttons">
-                    <button ontouchstart="" type="button" class="btn btn-info btn-xs show-edit-modal" data-toggle="modal" data-target="#edit-modal" title="Edit">
-                        <i class="fas fa-edit fa-xs" aria-hidden="true"></i>
-                    </button>
-                    <button ontouchstart="" type="button" class="btn btn-danger btn-xs move-done" title="Done">
-                        <i class="fas fa-check fa-xs class-change" aria-hidden="true"></i>
-                    </button>
-                </div>
-            </li>
-            @endforeach
+        <ul class="list-group group-todo">
+           <!-- insert todo list-->
         </ul>
-        <div class="panel-footer">
-            <small>{{$t_count}} list items</small>
+
+        <div class="panel-footer todo-footer">
+            <!-- insert todo count-->
         </div>
 
         <!-- Button trigger modal -->
@@ -34,27 +22,14 @@
     </div>
 
     <div class="panel panel-default col-md-5 col-xs-12">
+    <h2>Done</h2>
+
         <ul class="list-group group-done text-wrap">
-            <h2>Done</h2>
-            @foreach($dones as $done)
-            <li ontouchstart="" class="list-group-item">
-                <h4 class="list listgroup-item-heading">
-                    {{$done->title}}
-                </h4>
-                <p class="list-group-item-text">
-                    {{$done->text}}
-                </p>
-                <div class="buttons">
-                    <button ontouchstart="" type="button" class="btn btn-danger btn-xs delete-done" title="Delete">
-                        <i class="fas fa-minus fa-xs" aria-hidden="true"></i>
-                    </button>
-                </div>
-            </li>
-            @endforeach
+           <!-- insert done list-->
         </ul>
-        <div class="panel-footer">
-            <small>
-                {{$d_count}} list items</small>
+
+        <div class="panel-footer done-footer">
+        <!-- insert done count-->
         </div>
     </div>
 </div>

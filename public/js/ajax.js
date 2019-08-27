@@ -1,29 +1,33 @@
 $(document).ready(function () {
-    $('#todo-search').keypress(function (e) {
+
+    fetch_all_data();
+
+    $(document).on('keypress', '#todo-search', function (e) {
         if (e.which == 13) {
-            var keyword = $(this).val().trim();
-            if (keyword == '') {
-                return;
-            } else {
-                $.ajax({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    url: "{{ route('home.action') }}",
-                    contentType: "application/json",
-                    type: 'get',
-                    data: JSON.stringify({ 'keyword': keyword }),
-                    dataType: "json",
-                    scriptCharset: 'utf-8',
-                    success: function (data) {
-                        $().html(data);
-                    }
-                });
-            }
+            var query = $(this).val().trim();
+            fetch_all_data(query);
         }
     });
 });
 
+function fetch_all_data(query) {
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: "home/action",
+        method: 'GET',
+        data: { query: query },
+        dataType: 'json',
+        scriptCharset: 'utf-8',
+        success: function (data) {
+            $('.group-todo').html(data.todo);
+            $('.group-done').html(data.done);
+            $('.todo-footer').html(data.t_count);
+            $('.done-footer').html(data.d_count);
+        }
+    });
+}
 
 $(function () {
     $(document).on('click', '.save-change', function () {
@@ -46,14 +50,11 @@ $(function () {
             timeout: 10000,
             cache: false,
             scriptCharset: 'utf-8',
+            success: function (data) {
+                $('.group-todo').append(data.new_todo);
+                $('.todo-footer').html(data.count);
+            }
         }).then(
-
-            $('.group-todo').append("<li class='list-group-item'><h4 class='list listgroup-item-heading'>" + title + "</h4>\
-                <p class='list-group-item-text text-wrap'>" + text + "</p><div class='buttons'>\
-                <button type='button' class='btn btn-info btn-xs' data-toggle='modal' data-target='#exampleModal' title='Edit'>\
-                <i class='fas fa-edit fa-xs' aria-hidden='true'></i></button><button type='button' class='btn btn-danger btn-xs move-done' title='Done'>\
-                <i class='fas fa-check fa-xs clas-change' aria-hidden='true'></i></button></div></li>")
-        ).then(
             $('#todolist-modal').modal('hide')
         );
     });
@@ -76,16 +77,13 @@ $(function () {
             timeout: 10000,
             cache: false,
             scriptCharset: 'utf-8',
+            success: function (data) {
+                $('.group-done').append(data.done);
+                $('.todo-footer').html(data.t_count);
+                $('.done-footer').html(data.d_count);
+            }
         }).then(
-            $(this).removeClass('move-done')
-        ).then(
-            $(this).children('.class-change').removeClass('fa-check')
-        ).then(
-            $(this).children('.class-change').addClass('fa-minus')
-        ).then(
-            $(this).addClass('delete-done')
-        ).then(
-            $(this).parents('li').appendTo('.group-done')
+            $(this).parents('li').remove()
         );
     });
 });
@@ -107,6 +105,9 @@ $(function () {
             timeout: 10000,
             cache: false,
             scriptCharset: 'utf-8',
+            success: function (data) {
+                $('.done-footer').html(data.d_count);
+            }
         }).then(
             $(this).parents('li').remove()
         );

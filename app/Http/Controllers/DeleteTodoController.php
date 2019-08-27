@@ -18,5 +18,11 @@ class DeleteTodoController extends Controller
         } catch (\Exception $e) {
             \Log::info($e->getMessage());
         }
+
+        $d_count = '<small>' . Todo::where([['user_id', '=', Auth::id()], ['completed', '=', true]])->get()->count() . ' list items</small>';
+
+        $data = ['d_count' => $d_count];
+
+        echo json_encode($data);
     }
 }

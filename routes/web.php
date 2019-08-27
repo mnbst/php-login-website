@@ -17,9 +17,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index');
 
-Route::get('/search', 'SearchTodoController@action')->name('action');
+Route::get('/home/action', 'HomeController@action')->name('home.action');
 
 Route::post('/ajax/postTodo', 'PostTodoController@AjaxPost');
 
