@@ -2,11 +2,16 @@ $(document).ready(function () {
 
     fetch_all_data();
 
-    $(document).on('keypress', '#todo-search', function (e) {
+    $(document).on('keydown', '#todo-search', function (e) {
         if (e.which == 13) {
             var query = $(this).val().trim();
             fetch_all_data(query);
         }
+    });
+
+    $('#todo-search').focusout(function () {
+        var query = $(this).val().trim();
+        fetch_all_data(query);
     });
 });
 
