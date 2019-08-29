@@ -5,17 +5,18 @@ namespace App\Http\Controllers;
 use App\Todo;
 use Google_Client;
 use Google_Service_YouTube;
+use Illuminate\Support\Facades\Auth;
 
 class RecomendController extends Controller
 {
     public function searchvideo()
     {
 
-        $data = Todo::where('completed', false)->orderBy('created_at', 'desc')->first();
+        $data = Todo::where([['user_id', '=', Auth::id()], ['completed', '=', false]])->orderBy('created_at', 'desc')->first();
         if ($data) {
             $q = $data->title;
         } else {
-            $data = Todo::where('completed', true)->orderBy('created_at', 'desc')->first();
+            $data = Todo::where([['user_id', '=', Auth::id()], ['completed', '=', true]])->orderBy('created_at', 'asc')->first();
             if ($data) {
                 $q = $data->title;
             } else {
