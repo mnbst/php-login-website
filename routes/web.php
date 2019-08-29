@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/recomend', 'RecomendController@index');
+Route::get('/recommend', 'RecommendController@index');
 
 Route::get('/home', 'HomeController@index');
 
