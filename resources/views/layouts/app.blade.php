@@ -62,8 +62,8 @@
                                     <a class="dropdown-item" href="/home">
                                         {{ __('Home') }}
                                     </a>
-                                    <a class="dropdown-item" href="/recomend">
-                                        {{ __('Recomend') }}
+                                    <a class="dropdown-item" href="/recommend">
+                                        {{ __('Recommend') }}
                                     </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();

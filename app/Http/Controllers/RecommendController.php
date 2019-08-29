@@ -7,8 +7,18 @@ use Google_Client;
 use Google_Service_YouTube;
 use Illuminate\Support\Facades\Auth;
 
-class RecomendController extends Controller
+class RecommendController extends Controller
 {
+        /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function searchvideo()
     {
 
@@ -58,6 +68,6 @@ class RecomendController extends Controller
 
     public function index()
     {
-        return view('recomend', ['id' => $this->searchvideo()]);
+        return view('recommend', ['id' => $this->searchvideo()]);
     }
 }
