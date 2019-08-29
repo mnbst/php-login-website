@@ -76,7 +76,7 @@
                                 @auth
                                     <a href="{{ url('/home') }}">Home</a>
 
-                                    <a href="{{ url('/recomend') }}">Recomend</a>
+                                    <a href="{{ url('/recommend') }}">Recommend</a>
                                 @else
                                     <a href="{{ route('login') }}">Login</a>
 
