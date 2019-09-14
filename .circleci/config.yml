@@ -35,9 +35,6 @@ jobs: # ステップの集合
       #- run: php artisan migrate --env=testing --database=sqlite_testing --force
       #- run: ./vendor/bin/codecept build
       #- run: ./vendor/bin/codecept run
-      - run: php artisan key:generate
-      - run: cat .env | grep ^APP_
-      - run: php artisan config:cache
       - run: vendor/bin/phpunit
       # デプロイ例については https://circleci.com/docs/ja/2.0/deployment-integrations/ を参照してください
 
