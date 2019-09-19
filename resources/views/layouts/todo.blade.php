@@ -48,18 +48,21 @@
             <div class="modal-body">
                 <form action="">
                     @csrf
-                    <div class="form-group">
-                        <label for="" class="control-label">List Name</label>
+                    <div class="form-group form-title">
+                        <label for="title" class="control-label">List Name</label>
                         <input type="text" class="form-control input-lg input-title">
                     </div>
+                    @error('title')
+                    <small class="alert alert-danger">タイトルを入力してください</small>
+                    @enderror
                     <div class="form-group">
-                        <label for="" class="control-label">Description</label>
+                        <label for="text" class="control-label">Description</label>
                         <textarea rows="2" class="form-control"></textarea>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary close-modal" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary save-change">Save</button>
             </div>
         </div>

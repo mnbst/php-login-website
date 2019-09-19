@@ -12,6 +12,13 @@ class PostTodoController extends Controller
     public function AjaxPost(Request $request)
     {
         /* post:json */
+
+
+        $request->validate([
+            'title'=>['required','string', 'max:255'],
+            'text'=>'nullable'
+        ]);
+
         $todo = new Todo;
         if (Auth::check()) {
             try {

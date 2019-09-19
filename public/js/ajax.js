@@ -38,10 +38,7 @@ $(function () {
     $(document).on('click', '.save-change', function () {
         var title = $('.input-title').val();
         var text = $('textarea').val();
-
-        if (title == '') {
-            return;
-        }
+        $('.title-alert').remove();
 
         $.ajax({
             headers: {
@@ -58,10 +55,13 @@ $(function () {
             success: function (data) {
                 $('.group-todo').append(data.new_todo);
                 $('.todo-footer').html(data.count);
+                $('#todolist-modal').modal('hide');
+                $('.title-alert').remove();
+            },
+            error: function () {
+                $('.form-title').append('<small class="alert-danger title-alert">タイトルを入力してください</small>');
             }
-        }).then(
-            $('#todolist-modal').modal('hide')
-        );
+        });
     });
 });
 
