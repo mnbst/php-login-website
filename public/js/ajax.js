@@ -58,8 +58,10 @@ $(function () {
                 $('#todolist-modal').modal('hide');
                 $('.title-alert').remove();
             },
-            error: function () {
-                $('.form-title').append('<small class="alert-danger title-alert">タイトルを入力してください</small>');
+            error: function (data) {
+                if (data.responseJSON.errors.title[0] == 'The title field is required.') {
+                    $('.form-title').append('<small class="alert-danger title-alert">タイトルを入力してください</small>');
+                }
             }
         });
     });
