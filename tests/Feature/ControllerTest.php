@@ -19,7 +19,8 @@ class PatchTodoControllerTest extends TestCase
     {
         $response = $this->post('/ajax/postTodo', []);
 
-        $response->assertStatus(200);
+        $response->assertStatus(302);
+        $response->assertSessionHasErrors();
     }
 
     public function test_post_can_be_done()
@@ -52,7 +53,8 @@ class PatchTodoControllerTest extends TestCase
                 'text' => 'test text',
             ]);
 
-        $response->assertStatus(200);
+        $response->assertStatus(302);
+        $response->assertSessionHasErrors();
 
         $todo = Todo::all();
 
